@@ -1,0 +1,20 @@
+<%= form_with(model: post, local: true) do |form| %>
+  <div class="field">
+    <%= form.label :subject %>
+    <%= form.text_field :subject, id: :post_subject %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description, id: :post_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :group_name %>
+    <%= form.collection_select :group_id, Group.includes(:users).where(users: { id: current_user.id }), :id, :name, prompt: 'Select a Group...' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
